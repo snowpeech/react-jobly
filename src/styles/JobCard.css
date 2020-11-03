@@ -1,0 +1,15 @@
+.JobCard {
+  border: 1px solid black;
+  margin: 1rem;
+  padding: 1rem;
+}
+/* 
+.CompanyCard-link {
+  text-decoration: none;
+  color: black;
+}
+
+.CompanyCard-link:hover {
+  text-decoration: none;
+  color: blue;
+} */
