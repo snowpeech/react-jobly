@@ -2,12 +2,10 @@ import axios from 'axios';
 
 class JoblyApi {
     static async request(endpoint, paramsOrData = {}, verb = "get") {
-      paramsOrData._token = ( // for now, hardcode token for "testing"
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
-      "3RpbmciLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU1MzcwMzE1M30." +
-      "COmFETEsTxN_VfIlgIKw0bYJLkvbRQNgO1XCSE8NZ0U");
-  
-      console.debug("API Call:", endpoint, paramsOrData, verb);
+      const token = window.localStorage.getItem('_token');
+        
+      paramsOrData._token = token;
+      // console.debug("API Call:", endpoint, paramsOrData, verb);
   
       try {
         return (await axios({
@@ -25,16 +23,39 @@ class JoblyApi {
         throw Array.isArray(message) ? message : [message];
       }
     }
-  
+
     static async getCompany(handle) {
       let res = await this.request(`companies/${handle}`);
       return res.company;
     }
+    
+    static async getUser(username) {
+      let res = await this.request(`users/${username}`);
+      return res.user;
+    }
 
     static async login(username,password){
-      let res = await this.request(`login`,{username:username, password:password},"post");
-      console.log("JOBLYAPI res",res, 'data', res.data,'token',res.token);
+      let res = await this.request('login',{username, password},"post");
       return res.token;
+    }
+
+    static async signup(username, password, first_name,last_name,email){
+      let res = await this.request('users',{username, password, first_name, last_name, email},"post");
+      
+      return res.token;
+    }
+
+    static async editProfile(username, password, first_name, last_name, email=undefined, photo_url=undefined){
+      console.log("username from editprofile joblyapie", username)
+      console.log("editProfile JOBLYAPI",{ password, first_name, last_name, email, photo_url})
+      let res = await this.request(`users/${username}`,{ password, first_name, last_name, email, photo_url},"patch");
+      
+      return res.user;
+    }
+
+    static async applyToJob(id, username){
+      let res = await this.request(`jobs/${id}/apply`,username,"post");
+      return res.message;
     }
   }
 

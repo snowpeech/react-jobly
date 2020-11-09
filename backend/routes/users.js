@@ -35,7 +35,6 @@ router.get("/:username", authRequired, async function(req, res, next) {
 });
 
 /** POST / {userdata}  => {token: token} */
-
 router.post("/", async function(req, res, next) {
   try {
     delete req.body._token;
@@ -60,7 +59,9 @@ router.post("/", async function(req, res, next) {
 
 router.patch("/:username", ensureCorrectUser, async function(req, res, next) {
   try {
+    
     if ("username" in req.body || "is_admin" in req.body) {
+
       return next({ status: 400, message: "Not allowed" });
     }
     await User.authenticate({

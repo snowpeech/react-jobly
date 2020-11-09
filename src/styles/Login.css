@@ -1,0 +1,40 @@
+.Login-detail {
+  font-size: small;
+}
+
+button.Login {
+  border: none;
+  border-radius: 3px;
+  padding: 0.5rem;
+}
+
+.dead {
+  background-color: white;
+  color: grey;
+}
+
+.live {
+  color: steelblue;
+  font-weight: bold;
+  text-decoration: underline;
+  background-color: rgb(185, 220, 248);
+}
+
+/* 
+.Login-inactive {
+  border: none;
+  background-color: white;
+  color: grey;
+  padding: 0.5rem;
+}
+
+.Login-active {
+  border: none;
+  border-radius: 3px;
+  color: steelblue;
+  font-weight: bold;
+  text-decoration: underline;
+  background-color: rgb(185, 220, 248);
+  padding: 0.5rem;
+}
+ */

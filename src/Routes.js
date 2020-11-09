@@ -1,19 +1,22 @@
 import React from "react";
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import Home from "./Home";
 import Companies from "./Companies"
 import Company from "./Company"
 import Jobs from "./Jobs"
 import Login from "./Login"
 import Profile from "./Profile"
+import Logout from './Logout'
 
-const Routes =()=>{
+const Routes =({setToken, storedUser,setStoredUser})=>{
 /* Home page is a simple welcome page
 Companies lists companies (with search)
 Company lists company details and related jobs
 Jobs lists jobs (with search)
 Login allows user to log in or sign up?
 Profile displays profile information + allows user to edit  */
+//can I display different routes if logged in?
+
 return(
 <Switch>
     <Route exact path="/">
@@ -21,22 +24,30 @@ return(
     </Route>
 
     <Route exact path="/companies">
-        <Companies />
+    {storedUser ? <Companies /> : <Redirect to="/login" /> }
+                
     </Route>
     <Route exact path="/companies/:handle">
-        <Company />
+    {storedUser ? <Company /> : <Redirect to="/login" /> }
     </Route>
 
     <Route exact path="/jobs">
-        <Jobs />
+       {storedUser ? <Jobs /> : <Redirect to="/login" /> }
     </Route>
 
-    <Route exact path="/login">
-        <Login />
+    <Route exact path="/login" >
+    {storedUser ? <Redirect to="/" /> : <Login setToken={setToken}/>}
+        
+    </Route>
+
+    <Route exact path="/logout">
+        {/* maybe have the settoken here and redirect to home */}
+        <Logout setStoredUser={setStoredUser} setToken={setToken}/>
     </Route>
 
     <Route exact path="/profile">
-        <Profile />
+    {storedUser ?  <Profile storedUser={storedUser} setStoredUser={setStoredUser}/>: <Redirect to="/" /> }
+       
     </Route>
 
 </Switch>

@@ -7,12 +7,12 @@ const Companies=()=>{
     const initialState = []
     const [companies, setCompanies] = useState(initialState);
     const [query,setQuery] = useState({search:""});
-
     const searchCompanies = (term) =>{
         setQuery({search:term})
     }
 
     useEffect(()=>{
+
         async function getCompanies(){
             //populate companies list
             try {

@@ -2,10 +2,9 @@ import React from "react";
 import { NavLink} from 'react-router-dom';
 import "./styles/Navbar.css"
 
-const  Navbar=({loggedIn=true})=>{
-
+const  Navbar=({storedUser})=>{
     //before auth, default loggedIn = true for dev
-if(loggedIn){
+if(storedUser){
     return(<div className="Navbar">
         <NavLink exact to="/" className="navbar-brand">
             Jobly
@@ -16,13 +15,12 @@ if(loggedIn){
         <NavLink exact to="/jobs" className="navbar-brand">
             Jobs
         </NavLink>
-
         <NavLink exact to="/profile" className="navbar-brand">
             Profile
         </NavLink>
         <NavLink exact to="/logout" className="navbar-brand">
             Log out
-        </NavLink>
+        </NavLink>        
     </div> )
 }
 else {
