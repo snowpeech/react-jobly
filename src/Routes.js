@@ -17,7 +17,7 @@ Jobs lists jobs (with search)
 Login allows user to log in or sign up
 Profile displays profile information + allows user to edit  */
 
-const {setToken, storedUser,setStoredUser} = useContext(UserContext);
+const {storedUser} = useContext(UserContext);
 
 return(
 <Switch>
@@ -38,17 +38,16 @@ return(
     </Route>
 
     <Route exact path="/login" >
-    {storedUser ? <Redirect to="/" /> : <Login setToken={setToken}/>}
+    {storedUser ? <Redirect to="/" /> : <Login />}
         
     </Route>
 
     <Route exact path="/logout">
-        {/* maybe have the settoken here and redirect to home */}
-        <Logout setStoredUser={setStoredUser} setToken={setToken}/>
+        <Logout />
     </Route>
 
     <Route exact path="/profile">
-    {storedUser ?  <Profile storedUser={storedUser} setStoredUser={setStoredUser}/>: <Redirect to="/" /> }
+    {storedUser ?  <Profile />: <Redirect to="/" /> }
        
     </Route>
 

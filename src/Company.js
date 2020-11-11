@@ -36,14 +36,3 @@ return(<div>
 }
 
 export default Company;
-
-// 
-// const findCompany = async (handle)=>{
-//     const res = await JoblyApi.getCompany(handle);
-//     setCompany(res)
-//     console.log("res",res)
-//     // console.log("RES DATA",res.data)
-//     console.log("company", company)
-// }
-
-// findCompany(handle);

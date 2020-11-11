@@ -18,7 +18,6 @@ const Companies=()=>{
             try {
                 const res = await JoblyApi.request("companies",query);
                 setCompanies(res.companies);
-                console.log(res.companies); 
             } catch (e) {
                 console.error(e)
             }
@@ -27,9 +26,6 @@ const Companies=()=>{
     },[query])
 
 /*List of all companies with search bar*/
-// 1)  get all companies from api
-//store as a result
-// .map results into company cards
 
 return(<>
     <SearchBar submitSearch={searchCompanies}/>
@@ -46,16 +42,3 @@ return(<>
 }
 
 export default Companies;
-
-    // const getCompanies= async ()=>{
-    //     //populate companies list
-    //     try {
-    //        const res =  await JoblyApi.request("companies")
-    //        setCompanies([...res.companies]);
-    //        console.log(companies)
-
-    //     } catch (e) {
-    //         console.error(e)
-    //     }
-    // }
-    // getCompanies();

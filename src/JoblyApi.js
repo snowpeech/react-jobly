@@ -35,7 +35,6 @@ class JoblyApi {
     }
 
     static async login(username,password){
-      console.log("JOBLY API LOGIN::", username, password)
       let res = await this.request('login',{username, password},"post");
       return res.token;
     }
@@ -47,8 +46,6 @@ class JoblyApi {
     }
 
     static async editProfile(username, password, first_name, last_name, email=undefined, photo_url=undefined){
-      console.log("username from editprofile joblyapie", username)
-      console.log("editProfile JOBLYAPI",{ password, first_name, last_name, email, photo_url})
       let res = await this.request(`users/${username}`,{ password, first_name, last_name, email, photo_url},"patch");
       
       return res.user;

@@ -4,9 +4,8 @@ import "./styles/JobCard.css"
 
 const JobCard=({title, salary, equity,id,applied,handleApply})=>{
     const handleApplyClick=async (id) =>{
-        let resMessage = await JoblyApi.applyToJob(id);
+        await JoblyApi.applyToJob(id);
         handleApply();
-        console.log(resMessage);
     }
 
 return(<div className="JobCard"> 
