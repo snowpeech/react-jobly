@@ -1,23 +1,28 @@
-import React from "react";
+import React, {useContext} from "react";
 // import {useHistory} from 'react-router-dom'
 import useFields from "./hooks/useFields"
 import JoblyApi from "./JoblyApi";
+import UserContext from "./UserContext"
 
-const Profile=( {storedUser, setStoredUser})=>{
+const Profile=( )=>{
+    const {setStoredUser, storedUser} = useContext(UserContext);
+    
 //view & edit profile page
-// const history = useHistory();
-let parsedUser=JSON.parse(storedUser); // not entirely sure how to fix this. Getting a CORS issue here.
-//Uncaught SyntaxError: Unexpected token o in JSON at position 1 for this line... I think it's because I'm getting parsed user from stored user, which is changing because I am using setStoredUser
-const appliedJobs = parsedUser.jobs
-const [formData,handleChange] = useFields({first_name:parsedUser.first_name,last_name:parsedUser.last_name,email:parsedUser.email, photo_url:parsedUser.photo_url, password:""})
+const [formData,handleChange] = useFields(
+    {first_name:storedUser.first_name,
+    last_name:storedUser.last_name,
+    email:storedUser.email, 
+    photo_url:storedUser.photo_url, 
+    password:""});
                 
 // fill form
 const handleSubmit=async (evt)=>{
     evt.preventDefault();
     const {password, first_name, last_name, email, photo_url}=formData
-    const {username} = parsedUser;
+    const {username} = storedUser;
     let updatedUser = await JoblyApi.editProfile(username, password, first_name, last_name, email, photo_url);
     setStoredUser(updatedUser);
+    // if(updatedUser){alert("Successful update") } //obnoxios at the moment..
 }
 
 return(<>
@@ -25,7 +30,7 @@ return(<>
     <h1>Profile</h1>
         <div>
             <label htmlFor="username">Username: </label>
-            <span>{parsedUser.username}</span>
+            <span>{storedUser.username}</span>
         </div>
     
         <div>
@@ -71,18 +76,12 @@ return(<>
             type='password'
             name='password'
             value={formData.password}
-            onChange={handleChange} /> 
+            onChange={handleChange} 
+            required/> 
         </div>
     <button>Save Changes</button>
+    
 </form>
-
-<div>
-Jobs applied to:
-    <ul>
-{appliedJobs.map((job)=>(<li key={job.id}>{job.title}</li>))}
-
-    </ul>
-</div>
 </>)
 }
 

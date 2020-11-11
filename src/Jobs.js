@@ -1,13 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState,useContext} from "react";
 import SearchBar from "./SearchBar"
 import JobCard from "./JobCard"
 import JoblyApi from "./JoblyApi"
+import UserContext from "./UserContext";
 
 const Jobs=()=>{
+    const {storedUser} = useContext(UserContext);
     const [jobs, setJobs]=useState([]);
     const [appliedIds,setAppliedIds] = useState([]);
     const [query,setQuery] = useState({search:""})
     const [toggleApply, setToggleApply]=useState(true);
+
     const searchJobs =(term)=>{
         setQuery({search:term})
     }
@@ -33,16 +36,14 @@ const Jobs=()=>{
         async function getAppliedJobs(){
             //populate jobs list
             try {
-                const user = window.localStorage.getItem("user") 
-                const parsed=JSON.parse(user);
-                const username = parsed.username   
+                const username = storedUser.username   
                 
                 const resUser = await JoblyApi.getUser(username)
                 const applied = resUser.jobs;
                 let appliedIds=[];
                 for(let obj of applied){
                     appliedIds.push(obj["id"])
-                }
+                }                
                 setAppliedIds(appliedIds)
                 
             } catch (e) {

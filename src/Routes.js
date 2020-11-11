@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import {Route, Switch, Redirect} from 'react-router-dom';
 import Home from "./Home";
 import Companies from "./Companies"
@@ -7,15 +7,17 @@ import Jobs from "./Jobs"
 import Login from "./Login"
 import Profile from "./Profile"
 import Logout from './Logout'
+import UserContext from "./UserContext"
 
-const Routes =({setToken, storedUser,setStoredUser})=>{
+const Routes =()=>{
 /* Home page is a simple welcome page
 Companies lists companies (with search)
 Company lists company details and related jobs
 Jobs lists jobs (with search)
-Login allows user to log in or sign up?
+Login allows user to log in or sign up
 Profile displays profile information + allows user to edit  */
-//can I display different routes if logged in?
+
+const {setToken, storedUser,setStoredUser} = useContext(UserContext);
 
 return(
 <Switch>

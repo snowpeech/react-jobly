@@ -35,6 +35,7 @@ class JoblyApi {
     }
 
     static async login(username,password){
+      console.log("JOBLY API LOGIN::", username, password)
       let res = await this.request('login',{username, password},"post");
       return res.token;
     }

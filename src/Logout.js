@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import { Redirect } from "react-router-dom";
+import UserContext from "./UserContext";
 
-const Logout=({setStoredUser, setToken})=>{
+const Logout=()=>{
+    const {setStoredUser, setToken} =useContext(UserContext)
+
     useEffect(()=>{
         setStoredUser(null);
         setToken("");

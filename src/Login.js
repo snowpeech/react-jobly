@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
 import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
 import JoblyApi from "./JoblyApi";
+import UserContext from "./UserContext"
 import "./styles/Login.css"
 
-const Login=({setToken})=>{
+const Login=()=>{
+    const {setToken} = useContext(UserContext)
 //show login or sign-up form and will store signed-in token with successful login
 const history = useHistory();
 const [formData,handleChange] = useFields({username:"", password:"", usernameNew:"",passwordNew:"", first_name:"",last_name:"",email:""})
@@ -13,7 +15,9 @@ const [showLogin,setShowLogin]=useState(true);
 const handleLogin = async (evt) =>{
     evt.preventDefault();
     const {username, password} = formData;
+    console.log("handle login username and pswd", username, password)
     let _token= await JoblyApi.login(username,password);
+    console.log("set token in login", _token)
     setToken(_token);
     history.push("/")
 }
@@ -29,6 +33,7 @@ const handleSignup = async (evt) =>{
 const toggleForm = ()=>{
     setShowLogin(!showLogin)
 }
+
 const signUpClasses=`Login ${ showLogin ? "dead" : "live"}`;
 const logInClasses=`Login ${ showLogin ? "live" : "dead"}`;
 const loginForm=<div>
@@ -117,9 +122,9 @@ const signupForm=<div>
 </div>
 
 return(<> 
-<button onClick={toggleForm} className={logInClasses}> Log In</button >  <button onClick={toggleForm} className={signUpClasses}>Sign Up</button>
-{showLogin ? loginForm : signupForm}
-
+        <button onClick={toggleForm} className={logInClasses}> Log In</button > 
+        <button onClick={toggleForm} className={signUpClasses}>Sign Up</button>
+        {showLogin ? loginForm : signupForm}
     </>)
 }
 

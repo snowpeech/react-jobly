@@ -1,9 +1,12 @@
-import React from "react";
+import React,{useContext} from "react";
 import { NavLink} from 'react-router-dom';
 import "./styles/Navbar.css"
+import UserContext from "./UserContext"
 
-const  Navbar=({storedUser})=>{
+const  Navbar=()=>{
     //before auth, default loggedIn = true for dev
+    const {storedUser} = useContext(UserContext);
+
 if(storedUser){
     return(<div className="Navbar">
         <NavLink exact to="/" className="navbar-brand">

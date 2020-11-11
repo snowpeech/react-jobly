@@ -12,3 +12,7 @@
   text-decoration: none;
   color: blue;
 }
+
+.CompanyCard img {
+  max-height: 30px;
+}

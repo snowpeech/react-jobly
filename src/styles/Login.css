@@ -6,7 +6,12 @@ button.Login {
   border: none;
   border-radius: 3px;
   padding: 0.5rem;
+  outline: none;
 }
+/* 
+button.Login :active {
+  border: none;
+} */
 
 .dead {
   background-color: white;
@@ -19,22 +24,3 @@ button.Login {
   text-decoration: underline;
   background-color: rgb(185, 220, 248);
 }
-
-/* 
-.Login-inactive {
-  border: none;
-  background-color: white;
-  color: grey;
-  padding: 0.5rem;
-}
-
-.Login-active {
-  border: none;
-  border-radius: 3px;
-  color: steelblue;
-  font-weight: bold;
-  text-decoration: underline;
-  background-color: rgb(185, 220, 248);
-  padding: 0.5rem;
-}
- */

@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import "./styles/CompanyCard.css";
 import office_logo from "./office_logo_default.png"
 
-
-
-const CompanyCard=({handle,name,desc, logo_url=office_logo})=>{
+const CompanyCard=({handle,name,desc, logo_url})=>{
 //card with company information on it and link to company info
+
+console.log(office_logo)
 return(<Link to={`/companies/${handle}`} className="CompanyCard-link">
     <div className="CompanyCard">
         <h3>{name}</h3>
         <p>{desc}</p>
-        <img src={logo_url} alt="company logo" />
+        <img src={logo_url ? logo_url : office_logo} alt="company logo" />
+        {/* <img src="./office_logo_default.png" alt="company logo" /> */}
     </div>
 </Link>)
 }
